@@ -39,7 +39,7 @@ default['devstack']['localrc'] = {
     'neutron',
     'q-lbaas',           # Neutron extensions
     'q-fwaas',
-    'q-vpn',
+    # 'q-vpn',           # this effectively disables q-l3
     'cinder',            # Cinder
     'c-api',
     'c-vol',
