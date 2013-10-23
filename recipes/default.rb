@@ -19,7 +19,7 @@
 
 include_recipe 'git'
 
-directory "#{node['devstack']['dest']}" do
+directory "#{node['devstack']['localrc']['dest']}" do
   owner "root"
   group "root"
   mode 00755
@@ -27,13 +27,13 @@ directory "#{node['devstack']['dest']}" do
   recursive true
 end
 
-git "#{node['devstack']['dest']}/devstack" do
+git "#{node['devstack']['localrc']['dest']}/devstack" do
   repository "https://github.com/openstack-dev/devstack.git"
   reference "master"
 end
 
 template "localrc" do
-   path "#{node['devstack']['dest']}/devstack/localrc"
+   path "#{node['devstack']['localrc']['dest']}/devstack/localrc"
    owner "root"
    group "root"
    mode 00644
@@ -54,11 +54,14 @@ template "pip.conf" do
    mode 00644
 end
 
-execute "apt-get-update" do
-  command "apt-get update"
+execute "apt-get update"
+
+execute "#{node['devstack']['localrc']['dest']}/devstack/tools/create-stack-user.sh" do
+  not_if "id stack"
 end
 
 execute "stack.sh" do
-  command "./stack.sh > /var/log/devstack.log"
-  cwd "#{node['devstack']['dest']}/devstack"
+  command "sudo -u stack ./stack.sh"
+  cwd "#{node['devstack']['localrc']['dest']}/devstack"
+  not_if { ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
 end
