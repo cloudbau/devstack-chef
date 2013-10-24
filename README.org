@@ -27,7 +27,9 @@
    | ~['devstack']['dest']~              | String  | The directory to install DevStack          | ~/opt/stack~    |
    | ~['devstack']['pip-timeout']~       | Integer | The default time out for pip               | ~1000~          |
    
-   
+   The ~['devstack']['localrc']~ attribute space allows for overriding anything that ends up in ~localrc~.
+   For an example, see the included ~Vagrantfile~.
+
    
 ** Usage
    
