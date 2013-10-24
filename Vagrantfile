@@ -27,7 +27,9 @@ Vagrant.configure("2") do |config|
       chef.json = {
         devstack: {
           localrc: {
-            host_ip:               '192.168.101.101',
+            host_ip:               '192.168.101.101',        # 
+            stack_user:            'vagrant',                # Vagrant!!
+            logfile:               '/vagrant/stack.sh.log',  #
             admin_password:        'password',
             database_password:     'password',
             rabbit_password:       'password',
@@ -37,7 +39,6 @@ Vagrant.configure("2") do |config|
             keystone_token_format: 'PKI',
             swift_replicas:        1,
             swift_hash:            '011688b44136573e209e',
-            logfile:               '/vagrant/stack.sh.log',
             verbose:               true,
             log_color:             true,
             screen_logdir:         '/opt/stack/logs',

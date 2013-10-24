@@ -56,12 +56,14 @@ end
 
 execute "apt-get update"
 
+stack_user = node['devstack']['localrc']['stack_user'] || 'stack'
+
 execute "#{node['devstack']['localrc']['dest']}/devstack/tools/create-stack-user.sh" do
-  not_if "id stack"
+  not_if "id #{stack_user}"
 end
 
 execute "stack.sh" do
-  command "sudo -u stack ./stack.sh"
+  command "sudo -u #{stack_user} ./stack.sh"
   cwd "#{node['devstack']['localrc']['dest']}/devstack"
   not_if { ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
 end
