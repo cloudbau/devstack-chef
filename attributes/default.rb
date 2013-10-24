@@ -6,5 +6,8 @@ default['devstack']['service-password'] = "ostackdemo"
 default['devstack']['admin-password'] = "ostackdemo"
 default['devstack']['dest'] = "/opt/stack"
 
+default['devstack']['repository'] = 'https://github.com/openstack-dev/devstack.git'
+default['devstack']['reference'] = 'master'
+
 # Django...
 default['devstack']['pip-timeout'] = "1000"

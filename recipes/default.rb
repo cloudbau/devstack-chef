@@ -26,8 +26,8 @@ directory "#{node['devstack']['localrc']['dest']}" do
 end
 
 git "#{node['devstack']['localrc']['dest']}/devstack" do
-  repository "https://github.com/openstack-dev/devstack.git"
-  reference "master"
+  repository node['devstack']['repository']
+  reference node['devstack']['reference']
 end
 
 template "localrc" do
