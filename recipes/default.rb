@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+include_recipe 'apt'
 include_recipe 'git'
 
 directory "#{node['devstack']['localrc']['dest']}" do
@@ -53,8 +54,6 @@ template "pip.conf" do
    group "root"
    mode 00644
 end
-
-execute "apt-get update"
 
 stack_user = node['devstack']['localrc']['stack_user'] || 'stack'
 
