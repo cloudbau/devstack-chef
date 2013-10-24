@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
               'ceilometer-alarm-notify',
               'ceilometer-alarm-eval'
               ],
-            horizon_repo: 'https://github.com/openstack/horizon',
+            horizon_repo:          'https://github.com/openstack/horizon',
             horizon_branch:        'master',
             q_plugin:              'ml2',
             enable_tenant_tunnels: true,
