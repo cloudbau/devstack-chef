@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
           localrc: {
             host_ip:               '192.168.101.101',        # 
             stack_user:            'vagrant',                # Vagrant!!
-            logfile:               '/vagrant/stack.sh.log',  #
+            logfile:               '/vagrant/stack.sh.log',  # NB: the symlinks stack.sh creates wont work
             admin_password:        'password',
             database_password:     'password',
             rabbit_password:       'password',
