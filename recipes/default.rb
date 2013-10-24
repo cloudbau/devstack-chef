@@ -21,10 +21,7 @@ include_recipe 'apt'
 include_recipe 'git'
 
 directory "#{node['devstack']['localrc']['dest']}" do
-  owner "root"
-  group "root"
   mode 00755
-  action :create
   recursive true
 end
 
@@ -34,25 +31,20 @@ git "#{node['devstack']['localrc']['dest']}/devstack" do
 end
 
 template "localrc" do
-   path "#{node['devstack']['localrc']['dest']}/devstack/localrc"
-   owner "root"
-   group "root"
-   mode 00644
+  path "#{node['devstack']['localrc']['dest']}/devstack/localrc"
+  mode 00644
 end
 
 directory "/root/.pip" do
   owner "root"
   group "root"
   mode 00644
-  action :create
   recursive true
 end
 
 template "pip.conf" do
-   path "/root/.pip/pip.conf"
-   owner "root"
-   group "root"
-   mode 00644
+  path "/root/.pip/pip.conf"
+  mode 00644
 end
 
 stack_user = node['devstack']['localrc']['stack_user'] || 'stack'
