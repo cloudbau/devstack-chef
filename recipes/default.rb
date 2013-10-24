@@ -49,7 +49,7 @@ end
 
 stack_user = node['devstack']['localrc']['stack_user'] || 'stack'
 
-execute "#{node['devstack']['localrc']['dest']}/devstack/tools/create-stack-user.sh" do
+execute "bash #{node['devstack']['localrc']['dest']}/devstack/tools/create-stack-user.sh" do
   not_if "id #{stack_user}"
 end
 
