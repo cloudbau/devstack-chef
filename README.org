@@ -57,4 +57,5 @@
       
 ** License and Authors
    
-   Authors: Cameron Lopez
+   - Author:: Cameron Lopez (cameronjlopez@gmail.com)
+   - Author:: Stephan Renatus (s.renatus@cloudbau.de)
