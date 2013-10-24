@@ -2,6 +2,6 @@
 <%   if value.kind_of? Array -%>
 <%=    "#{key.gsub(/-/,'_').upcase}=#{value.join(',')}" %>
 <%   else %>
-<%=    "#{key.gsub(/-/,'_').upcase}=#{value}" %>
+<%=    "#{key.gsub(/-/,'_').upcase}=#{ (value == true) ? "True" : value}" %>
 <%   end -%>
 <% end %>

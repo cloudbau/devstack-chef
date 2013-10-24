@@ -11,8 +11,8 @@ default['devstack']['localrc'] = {
   swift_replicas:        1,
   swift_hash:            '011688b44136573e209e',
   logfile:               '/opt/stack/logs/stack.sh.log',
-  verbose:               'True',
-  log_color:             'True',
+  verbose:               true,
+  log_color:             true,
   screen_logdir:         '/opt/stack/logs',
   enabled_services:  [
     'rabbit', # 'zeromq', 'qpid'
@@ -59,6 +59,6 @@ default['devstack']['localrc'] = {
   horizon_repo: 'https://github.com/openstack/horizon',
   horizon_branch:        'master',
   q_plugin:              'ml2',
-  enable_tenant_tunnels: 'True',
-  apache_enabled_services: 'keystone'
+  enable_tenant_tunnels: true,
+  apache_enabled_services: 'keystone' # [ 'keystone', 'swift']
 }
