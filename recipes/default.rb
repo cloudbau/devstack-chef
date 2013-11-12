@@ -57,7 +57,8 @@ execute "stack.sh" do
   user stack_user
   command "./stack.sh"
   environment( 
-    'HOME' => node['devstack']['localrc']['dest']
+    'HOME' => node['devstack']['localrc']['dest'],
+    'no_proxy' => "#{ENV["no_proxy"]},#{node[:ipaddress]}"
   )
   cwd "#{node['devstack']['localrc']['dest']}/devstack"
   not_if { ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
