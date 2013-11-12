@@ -54,7 +54,11 @@ execute "bash #{node['devstack']['localrc']['dest']}/devstack/tools/create-stack
 end
 
 execute "stack.sh" do
-  command "sudo -u #{stack_user} ./stack.sh"
+  user stack_user
+  command "./stack.sh"
+  environment( 
+    'HOME' => node['devstack']['localrc']['dest']
+  )
   cwd "#{node['devstack']['localrc']['dest']}/devstack"
   not_if { ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
 end
