@@ -27,9 +27,9 @@ Vagrant.configure("2") do |config|
       chef.json = {
         devstack: {
           localrc: {
-            host_ip:               '192.168.101.101',        # 
-            stack_user:            'vagrant',                # Vagrant!!
-            logfile:               '/vagrant/stack.sh.log',  # NB: the symlinks stack.sh creates wont work (and make Berkshelf choke)
+            host_ip:               '192.168.101.101',
+            stack_user:            'stack',
+            logfile:               '/opt/stack/logs/stack.sh.log',
             admin_password:        'password',
             database_password:     'password',
             rabbit_password:       'password',
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
               'horizon',           # Horizon
               'n-api',             # Nova
               'n-crt',
-              'n-obj',
+              'n-obj', # AWS compat
               'n-cpu',
               'n-cond',
               'n-sch',
@@ -87,8 +87,9 @@ Vagrant.configure("2") do |config|
             horizon_repo:          'https://github.com/openstack/horizon',
             horizon_branch:        'master',
             q_plugin:              'ml2',
-            enable_tenant_tunnels: true,
-            apache_enabled_services: 'keystone' # [ 'keystone', 'swift']
+            q_agent:               'linuxbridge',
+            # enable_tenant_tunnels: true,
+            apache_enabled_services: 'keystone'
           }
         }
       }
