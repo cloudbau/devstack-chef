@@ -15,13 +15,17 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--cpus", 1]
     vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
   end
 
   config.vm.define :devstack do |conf|
     conf.vm.hostname = "devstack"
     conf.vm.box = "opscode-ubuntu-12.04"
     conf.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+    # eth1, this will be the endpoint
     conf.vm.network "private_network", ip: "192.168.101.101"
+    # eth2, this will be the OpenStack "public" network, use DevStack default
+    config.vm.network "private_network", ip: "172.24.4.225", :netmask => "255.255.255.224", :auto_config => false
     conf.vm.provision :chef_solo do |chef|
       chef.run_list = 'devstack'
       chef.json = {
@@ -93,6 +97,9 @@ Vagrant.configure("2") do |config|
         }
       }
     end
+    #config.vm.provision :shell, :inline => "cd devstack; sudo -u vagrant env HOME=/home/vagrant ./stack.sh"
+    #config.vm.provision :shell, :inline => "ovs-vsctl add-port br-ex eth2"
+
   end
 
 end
