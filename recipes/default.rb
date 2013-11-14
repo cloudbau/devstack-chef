@@ -53,6 +53,16 @@ execute "bash #{node['devstack']['localrc']['dest']}/devstack/tools/create-stack
   not_if "id #{stack_user}"
 end
 
+execute "unstack.sh" do
+  user stack_user
+  command "./unstack.sh"
+  environment( 
+    'HOME' => node['devstack']['localrc']['dest']
+  )
+  cwd "#{node['devstack']['localrc']['dest']}/devstack"
+  only_if { node['devstack']['unstack'] }
+end
+
 execute "stack.sh" do
   user stack_user
   command "./stack.sh"
@@ -60,5 +70,5 @@ execute "stack.sh" do
     'HOME' => node['devstack']['localrc']['dest']
   )
   cwd "#{node['devstack']['localrc']['dest']}/devstack"
-  not_if { ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
+  only_if { node['devstack']['unstack'] or not ::File.exists? "#{node['devstack']['localrc']['dest']}/devstack/stack-screenrc" }
 end
