@@ -43,7 +43,6 @@ First things first:
 
 - Become the `stack` user: `sudo -u stack -i`.
 - If you intend to use the CLI on the VM:
-  - take care to work around the proxy: `export no_proxy=$no_proxy:$MYIP`
 
 
 ### See what's going on
