@@ -2,7 +2,7 @@ name             'devstack'
 maintainer       "Rackspace US, Inc"
 license          "Apache 2.0"
 description      'Installs/Configures devstack'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.org'))
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
 
 %w{ debian ubuntu }.each do |os|
