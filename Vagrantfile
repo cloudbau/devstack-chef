@@ -93,7 +93,9 @@ Vagrant.configure("2") do |config|
             q_plugin:              'ml2',
             q_agent:               'linuxbridge',
             # enable_tenant_tunnels: true,
-            apache_enabled_services: 'keystone'
+            apache_enabled_services: 'keystone',
+            # add the google dns as a sane default
+            q_dhcp_extra_default_opts: 'dnsmasq_dns_server=8.8.8.8'
           }
         }
       }
