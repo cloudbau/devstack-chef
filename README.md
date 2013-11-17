@@ -206,14 +206,14 @@ In the one-node Devstack deployment, we have all the non-red components (veth pa
 By adding the IP address of the public network's router (by default the floating IP range is 172.24.4.224/28) to the bridge that is supposed to be linked with the public network (upper right corner), we get a host-only connection:
 
 ```console
-root@mo-5657923d1:~# neutron net-list
+root@devstack:~# neutron net-list
 +--------------------------------------+---------+--------------------------------------------------+
 | id                                   | name    | subnets                                          |
 +--------------------------------------+---------+--------------------------------------------------+
 | 3cf1ce39-df34-40d1-b91f-24e3f606c748 | public  | 8e8cf5b6-9500-47ab-abc0-25301bbeba8d             | # <<<<<
 | 912c4d05-783b-4b4a-8881-bea40dfc08b7 | private | c573b0b9-e09b-4453-af93-a2438785aee2 10.0.0.0/24 |
 +--------------------------------------+---------+--------------------------------------------------+
-root@mo-5657923d1:~# brctl show
+root@devstack:~# brctl show
 bridge name bridge id   STP enabled interfaces
 brq3cf1ce39-df    8000.3a0c3bcfaf52 no    tap78fd7c80-65                                              # <<<<<
 brq912c4d05-78    8000.0ef36043ca65 no    tap9268ccea-e9
@@ -221,13 +221,20 @@ brq912c4d05-78    8000.0ef36043ca65 no    tap9268ccea-e9
               tapd213bec4-f5
               tapd8a487b3-8c
 virbr0    8000.000000000000 yes
-root@mo-5657923d1:~# ip netns
+root@devstack:~# ip netns
 qrouter-9ed3cae0-d09e-4078-8c2a-3f04a5f6b780
 qdhcp-912c4d05-783b-4b4a-8881-bea40dfc08b7
-root@mo-5657923d1:~# ip netns exec qrouter-9ed3cae0-d09e-4078-8c2a-3f04a5f6b780 ip r
+
+# or short
+
+root@devstack:~#  BRIDGE=$(brctl show | grep `neutron net-list --quote none -f csv -c id -- --router:external=True | tail -n1 | awk '{split($0,a,"-") ; print a[1]}'` | awk '{split($0,a," ") ; print a[1]}')
+root@devstack:~# echo $BRIDGE
+brq97103221-cd
+
+root@devstack:~# ip netns exec qrouter-9ed3cae0-d09e-4078-8c2a-3f04a5f6b780 ip r
 default via 172.24.4.225 dev qg-78fd7c80-65
-root@mo-5657923d1:~# ip a add 172.24.4.225/28 dev brq3cf1ce39-df
-root@mo-5657923d1:~# ssh cirros@172.24.4.227
+root@devstack:~# ip a add 172.24.4.225/28 dev brq3cf1ce39-df
+root@devstack:~# ssh cirros@172.24.4.227
 cirros@172.24.4.227's password:   # 'cubswin:)'
 $ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 16436 qdisc noqueue
