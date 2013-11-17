@@ -103,6 +103,9 @@ Vagrant.configure("2") do |config|
     #config.vm.provision :shell, :inline => "cd devstack; sudo -u vagrant env HOME=/home/vagrant ./stack.sh"
     #config.vm.provision :shell, :inline => "ovs-vsctl add-port br-ex eth2"
 
+    ## do this for enabling internet to the public openstack network
+    #config.vm.provision :shell, :inline => "sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE"
+
   end
 
 end
