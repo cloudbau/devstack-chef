@@ -72,21 +72,21 @@ Vagrant.configure("2") do |config|
               'q-lbaas',           # Neutron extensions
               'q-fwaas',
               # 'q-vpn',           # this effectively disables q-l3
+              # 'heat',              # Heat
+              # 'h-api',
+              # 'h-api-cfn',
+              # 'h-api-cw',
+              # 'h-eng',
+              # 'ceilometer-acompute',
+              # 'ceilometer-acentral',
+              # 'ceilometer-collector',
+              # 'ceilometer-api',
+              # 'ceilometer-alarm-notify',
+              # 'ceilometer-alarm-eval',
               'cinder',            # Cinder
               'c-api',
               'c-vol',
-              'c-sch',
-              'heat',              # Heat
-              'h-api',
-              'h-api-cfn',
-              'h-api-cw',
-              'h-eng',
-              'ceilometer-acompute',
-              'ceilometer-acentral',
-              'ceilometer-collector',
-              'ceilometer-api',
-              'ceilometer-alarm-notify',
-              'ceilometer-alarm-eval'
+              'c-sch'
               ],
             # How to override the repo/branch                
             # horizon_repo:          'https://github.com/openstack/horizon',
