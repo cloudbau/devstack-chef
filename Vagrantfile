@@ -92,7 +92,7 @@ Vagrant.configure("2") do |config|
             # horizon_repo:          'https://github.com/openstack/horizon',
             # horizon_branch:        'master',
             q_plugin:              'ml2',
-            q_agent:               'linuxbridge',
+            q_agent:               'openvswitch',
             # enable_tenant_tunnels: true,
             apache_enabled_services: 'keystone',
             # add the google dns as a sane default
