@@ -30,6 +30,8 @@ Vagrant.configure("2") do |config|
       chef.run_list = 'devstack'
       chef.json = {
         devstack: {
+          # ovs is broken in icehouse/master, so use stable havana
+          reference: 'stable/havana',
           localrc: {
             host_ip:               '192.168.101.101',
             stack_user:            'stack',
@@ -46,6 +48,8 @@ Vagrant.configure("2") do |config|
             verbose:               true,
             log_color:             true,
             screen_logdir:         '/opt/stack/logs',
+            # if we want sec groups in havana with OVS we need ovs and bridges
+            libvirt_vif_driver:    'nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver',
             enabled_services:  [
               'rabbit', # 'zeromq', 'qpid'
               'mysql',
